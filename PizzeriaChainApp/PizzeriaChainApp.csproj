@@ -74,6 +74,7 @@
       <DependentUpon>PizzeriaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\AppData.cs" />
+    <Compile Include="Data\LookupItem.cs" />
     <Compile Include="Data\OrderRow.cs" />
     <Compile Include="Helpers\AuthService.cs" />
     <Compile Include="Helpers\CaptchaHelper.cs" />

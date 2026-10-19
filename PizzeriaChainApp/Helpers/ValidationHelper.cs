@@ -1,5 +1,7 @@
 ﻿using System.Linq;
 using System.Text.RegularExpressions;
+using System;
+using System.Globalization;
 
 namespace PizzeriaChainApp.Helpers
 {
@@ -66,6 +68,48 @@ namespace PizzeriaChainApp.Helpers
                 return "Используйте только английскую раскладку.";
             if (!password.Any(ch => ch >= '0' && ch <= '9'))
                 return "Добавьте хотя бы одну цифру.";
+            return null;
+        }
+        // ---- Заказы: ограничения числовых полей ----
+        public const decimal MinAmount = 50m;
+        public const decimal MaxAmount = 100000m;
+
+        public static bool IsAmountChars(string text)
+        {
+            return text.All(ch => (ch >= '0' && ch <= '9') || ch == ',' || ch == '.');
+        }
+
+        public static bool IsDateTimeChars(string text)
+        {
+            return text.All(ch => (ch >= '0' && ch <= '9') || ch == '.' || ch == ':' || ch == ' ');
+        }
+
+        public static string ValidateAmount(string text, out decimal value)
+        {
+            value = 0;
+            if (string.IsNullOrWhiteSpace(text))
+                return "Введите сумму заказа.";
+
+            string normalized = text.Trim().Replace('.', ',');
+            if (!decimal.TryParse(normalized, NumberStyles.AllowDecimalPoint,
+                                  new CultureInfo("ru-RU"), out value))
+                return "Сумма указана в неверном формате.";
+            if (value < MinAmount || value > MaxAmount)
+                return "Сумма заказа должна быть от " + MinAmount + " до " + MaxAmount + " ₽.";
+            if (decimal.Round(value, 2) != value)
+                return "Сумма: не более двух знаков после запятой.";
+            return null;
+        }
+
+        public static string ValidateOrderDate(string text, out DateTime value)
+        {
+            value = DateTime.MinValue;
+            if (string.IsNullOrWhiteSpace(text) ||
+                !DateTime.TryParseExact(text.Trim(), "dd.MM.yyyy HH:mm",
+                    CultureInfo.InvariantCulture, DateTimeStyles.None, out value))
+                return "Дата и время: формат дд.мм.гггг чч:мм.";
+            if (value < new DateTime(2020, 1, 1) || value > DateTime.Now)
+                return "Дата заказа: от 01.01.2020 до текущего момента.";
             return null;
         }
     }

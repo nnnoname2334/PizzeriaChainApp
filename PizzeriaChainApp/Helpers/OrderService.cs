@@ -80,5 +80,77 @@ namespace PizzeriaChainApp.Helpers
             return value != null &&
                    value.IndexOf(text, StringComparison.CurrentCultureIgnoreCase) >= 0;
         }
+        // Списки для выпадающих полей формы заказа
+        public static List<LookupItem> GetCustomerLookup()
+        {
+            using (var db = AppData.CreateContext())
+            {
+                return db.customer.AsNoTracking()
+                    .OrderBy(c => c.full_name)
+                    .Select(c => new LookupItem
+                    {
+                        Id = c.id,
+                        Name = c.full_name + " (" + c.login + ")"
+                    })
+                    .ToList();
+            }
+        }
+
+        public static List<LookupItem> GetPizzeriaLookup()
+        {
+            using (var db = AppData.CreateContext())
+            {
+                return db.pizzeria.AsNoTracking()
+                    .OrderBy(p => p.city).ThenBy(p => p.address)
+                    .Select(p => new LookupItem
+                    {
+                        Id = p.id,
+                        Name = p.name + ", " + p.city + ", " + p.address
+                    })
+                    .ToList();
+            }
+        }
+
+        // id == null: новый заказ, иначе правка существующего
+        public static void SaveOrder(int? id, int customerId, int pizzeriaId, DateTime date,
+                                     string orderType, string status, decimal total)
+        {
+            using (var db = AppData.CreateContext())
+            {
+                customer_order order;
+                if (id.HasValue)
+                {
+                    order = db.customer_order.Find(id.Value);
+                    if (order == null)
+                        throw new InvalidOperationException("Заказ не найден: возможно, он уже удалён.");
+                }
+                else
+                {
+                    order = new customer_order();
+                    db.customer_order.Add(order);
+                }
+
+                order.customer_id = customerId;
+                order.pizzeria_id = pizzeriaId;
+                order.order_date = date;
+                order.order_type = orderType;
+                order.status = status;
+                order.total_amount = total;
+                db.SaveChanges();
+            }
+        }
+
+        public static void DeleteOrder(int id)
+        {
+            using (var db = AppData.CreateContext())
+            {
+                var order = db.customer_order.Find(id);
+                if (order != null)
+                {
+                    db.customer_order.Remove(order);
+                    db.SaveChanges();
+                }
+            }
+        }
     }
 }
