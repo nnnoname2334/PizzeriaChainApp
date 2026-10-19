@@ -1,34 +1,58 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Windows.Threading;
+using PizzeriaChainApp.Helpers;
 
 namespace PizzeriaChainApp
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
+        private const string AppTitle = "Сеть пиццерий";
+
         public MainWindow()
         {
             InitializeComponent();
-            var admin = PizzeriaChainApp.Data.AppData.GetContext()
-    .customer.FirstOrDefault(c => c.login == "admin");
-            MessageBox.Show(admin != null &&
-                PizzeriaChainApp.Helpers.PasswordHelper.Verify("Admin123!", admin.salt, admin.password_hash)
-                ? "База подключена, пароль проверен" : "Что-то не так");
+            // На следующем шаге здесь будет: MainFrame.Navigate(new Pages.AuthPage());
         }
 
+        // Часы в правом нижнем углу
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            DateTimeNow.Text = DateTime.Now.ToString();
+            var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+            timer.Tick += (o, t) => DateTimeNow.Text = DateTime.Now.ToString();
+            timer.Start();
+        }
+
+        // Выход с подтверждением
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            if (!MessageHelper.Confirm("Вы действительно хотите выйти?"))
+                e.Cancel = true;
+        }
+
+        private void ButtonBack_Click(object sender, RoutedEventArgs e)
+        {
+            if (MainFrame.CanGoBack)
+                MainFrame.GoBack();
+        }
+
+        private void ButtonTheme_Click(object sender, RoutedEventArgs e)
+        {
+            ThemeManager.Toggle();
+        }
+
+        // Динамический заголовок: берётся из свойства Title текущей страницы
+        private void MainFrame_Navigated(object sender, NavigationEventArgs e)
+        {
+            ButtonBack.Visibility = MainFrame.CanGoBack ? Visibility.Visible : Visibility.Hidden;
+
+            string title = (MainFrame.Content as Page)?.Title ?? "";
+            PageTitleText.Text = title;
+            Title = string.IsNullOrEmpty(title) ? AppTitle : AppTitle + " — " + title;
+        }
     }
 }

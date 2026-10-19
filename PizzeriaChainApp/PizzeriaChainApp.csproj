@@ -74,7 +74,9 @@
       <DependentUpon>PizzeriaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\AppData.cs" />
+    <Compile Include="Helpers\MessageHelper.cs" />
     <Compile Include="Helpers\PasswordHelper.cs" />
+    <Compile Include="Helpers\ThemeManager.cs" />
     <Compile Include="pizzeria.cs">
       <DependentUpon>PizzeriaModel.tt</DependentUpon>
     </Compile>
