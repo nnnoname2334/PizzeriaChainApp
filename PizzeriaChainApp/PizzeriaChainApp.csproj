@@ -74,9 +74,11 @@
       <DependentUpon>PizzeriaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\AppData.cs" />
+    <Compile Include="Data\OrderRow.cs" />
     <Compile Include="Helpers\AuthService.cs" />
     <Compile Include="Helpers\CaptchaHelper.cs" />
     <Compile Include="Helpers\MessageHelper.cs" />
+    <Compile Include="Helpers\OrderService.cs" />
     <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Helpers\ThemeManager.cs" />
     <Compile Include="Helpers\ValidationHelper.cs" />

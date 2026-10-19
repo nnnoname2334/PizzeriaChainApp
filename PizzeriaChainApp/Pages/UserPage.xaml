@@ -1,13 +1,79 @@
 ﻿<Page x:Class="PizzeriaChainApp.Pages.UserPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      Title="Страница пользователя" Loaded="Page_Loaded">
-    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-        <TextBlock x:Name="TextWelcome" FontSize="22" FontWeight="Bold"
-                   TextAlignment="Center" Margin="0,0,0,16"/>
-        <TextBlock Text="Здесь будут заказы: просмотр, поиск, сортировка и фильтрация."
-                   TextAlignment="Center" Margin="0,0,0,16"/>
-        <Button x:Name="ButtonLogout" Content="Выйти из аккаунта"
-                ToolTip="Выйти из учётной записи" Click="ButtonLogout_Click"/>
-    </StackPanel>
+      Title="Мои заказы" Loaded="Page_Loaded">
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Поиск, сортировка, фильтры -->
+        <WrapPanel Grid.Row="0" Margin="0,0,0,8">
+            <TextBox x:Name="TextBoxSearch" Tag="Поиск: пиццерия, адрес, город"
+                     MaxLength="100"
+                     ToolTip="Поиск по названию пиццерии, адресу или городу"
+                     TextChanged="Filter_Changed"/>
+
+            <ComboBox x:Name="ComboSort" SelectedIndex="0" ToolTip="Сортировка заказов"
+                      SelectionChanged="Filter_Changed">
+                <ComboBoxItem Content="Сначала новые"/>
+                <ComboBoxItem Content="Сначала старые"/>
+                <ComboBoxItem Content="Сумма по возрастанию"/>
+                <ComboBoxItem Content="Сумма по убыванию"/>
+            </ComboBox>
+
+            <ComboBox x:Name="ComboType" SelectedIndex="0" ToolTip="Фильтр по типу заказа"
+                      SelectionChanged="Filter_Changed">
+                <ComboBoxItem Content="Все типы"/>
+                <ComboBoxItem Content="В зале"/>
+                <ComboBoxItem Content="Самовывоз"/>
+                <ComboBoxItem Content="Доставка"/>
+            </ComboBox>
+
+            <ComboBox x:Name="ComboStatus" SelectedIndex="0" ToolTip="Фильтр по статусу заказа"
+                      SelectionChanged="Filter_Changed">
+                <ComboBoxItem Content="Все статусы"/>
+                <ComboBoxItem Content="Новый"/>
+                <ComboBoxItem Content="Готовится"/>
+                <ComboBoxItem Content="Выдан"/>
+                <ComboBoxItem Content="Отменён"/>
+            </ComboBox>
+
+            <Button x:Name="ButtonClear" Content="Очистить фильтры"
+                    ToolTip="Сбросить поиск, сортировку и фильтры"
+                    Click="ButtonClear_Click"/>
+        </WrapPanel>
+
+        <!-- Таблица заказов -->
+        <DataGrid x:Name="DataGridOrders" Grid.Row="1" CanUserSortColumns="False"
+                  ToolTip="Ваши заказы">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="№" Binding="{Binding Id}" Width="60"/>
+                <DataGridTextColumn Header="Пиццерия" Binding="{Binding PizzeriaName}" Width="*"/>
+                <DataGridTextColumn Header="Адрес" Binding="{Binding FullAddress}" Width="1.3*"/>
+                <DataGridTextColumn Header="Дата"
+                                    Binding="{Binding OrderDate, StringFormat=dd.MM.yyyy HH:mm}"
+                                    Width="140"/>
+                <DataGridTextColumn Header="Тип" Binding="{Binding OrderType}" Width="110"/>
+                <DataGridTextColumn Header="Статус" Binding="{Binding Status}" Width="110"/>
+                <DataGridTextColumn Header="Сумма"
+                                    Binding="{Binding TotalAmount, StringFormat={}{0:N2} ₽}"
+                                    Width="120"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Итог и выход -->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="TextSummary" Grid.Column="0" Margin="8,0"
+                       VerticalAlignment="Center" TextWrapping="Wrap"/>
+            <Button x:Name="ButtonLogout" Grid.Column="1" Content="Выйти из аккаунта"
+                    ToolTip="Выйти из учётной записи" Click="ButtonLogout_Click"/>
+        </Grid>
+    </Grid>
 </Page>
