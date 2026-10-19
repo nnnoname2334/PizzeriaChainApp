@@ -1,0 +1,71 @@
+﻿<Window x:Class="PizzeriaChainApp.Dialogs.OrderEditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Style="{StaticResource {x:Type Window}}"
+        Title="Заказ" Width="620" Height="520"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+    <StackPanel Margin="24" HorizontalAlignment="Center">
+        <TextBlock x:Name="TextTitle" FontSize="22" FontWeight="Bold"
+                   HorizontalAlignment="Center" Margin="0,0,0,16"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Content="Клиент" VerticalAlignment="Center"/>
+            <ComboBox x:Name="ComboCustomer" Grid.Row="0" Grid.Column="1" Width="360"
+                      DisplayMemberPath="Name" SelectedValuePath="Id"
+                      ToolTip="Выберите клиента"/>
+
+            <Label Grid.Row="1" Content="Пиццерия" VerticalAlignment="Center"/>
+            <ComboBox x:Name="ComboPizzeria" Grid.Row="1" Grid.Column="1" Width="360"
+                      DisplayMemberPath="Name" SelectedValuePath="Id"
+                      ToolTip="Выберите пиццерию"/>
+
+            <Label Grid.Row="2" Content="Дата и время" VerticalAlignment="Center"/>
+            <TextBox x:Name="TextBoxDate" Grid.Row="2" Grid.Column="1" Width="360"
+                     Tag="дд.мм.гггг чч:мм" MaxLength="16"
+                     ToolTip="Формат: дд.мм.гггг чч:мм (не позже текущего момента)"
+                     PreviewTextInput="TextBoxDate_PreviewTextInput"/>
+
+            <Label Grid.Row="3" Content="Тип заказа" VerticalAlignment="Center"/>
+            <ComboBox x:Name="ComboType" Grid.Row="3" Grid.Column="1" Width="360"
+                      ToolTip="Выберите тип заказа">
+                <ComboBoxItem Content="В зале"/>
+                <ComboBoxItem Content="Самовывоз"/>
+                <ComboBoxItem Content="Доставка"/>
+            </ComboBox>
+
+            <Label Grid.Row="4" Content="Статус" VerticalAlignment="Center"/>
+            <ComboBox x:Name="ComboStatus" Grid.Row="4" Grid.Column="1" Width="360"
+                      ToolTip="Выберите статус заказа">
+                <ComboBoxItem Content="Новый"/>
+                <ComboBoxItem Content="Готовится"/>
+                <ComboBoxItem Content="Выдан"/>
+                <ComboBoxItem Content="Отменён"/>
+            </ComboBox>
+
+            <Label Grid.Row="5" Content="Сумма, ₽" VerticalAlignment="Center"/>
+            <TextBox x:Name="TextBoxAmount" Grid.Row="5" Grid.Column="1" Width="360"
+                     Tag="От 50 до 100000, например 1250,50" MaxLength="9"
+                     ToolTip="Сумма заказа от 50 до 100000 ₽, не более двух знаков после запятой"
+                     PreviewTextInput="TextBoxAmount_PreviewTextInput"/>
+        </Grid>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,16,0,0">
+            <Button x:Name="ButtonSave" Content="Сохранить" IsDefault="True"
+                    ToolTip="Сохранить заказ" Click="ButtonSave_Click"/>
+            <Button x:Name="ButtonCancel" Content="Отмена" IsCancel="True"
+                    ToolTip="Закрыть окно без сохранения"/>
+        </StackPanel>
+    </StackPanel>
+</Window>
