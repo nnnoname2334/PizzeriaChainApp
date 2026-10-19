@@ -73,6 +73,8 @@
     <Compile Include="customer_order.cs">
       <DependentUpon>PizzeriaModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\AppData.cs" />
+    <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="pizzeria.cs">
       <DependentUpon>PizzeriaModel.tt</DependentUpon>
     </Compile>
@@ -157,8 +159,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Data\" />
-    <Folder Include="Helpers\" />
     <Folder Include="Pages\" />
     <Folder Include="Resources\" />
   </ItemGroup>

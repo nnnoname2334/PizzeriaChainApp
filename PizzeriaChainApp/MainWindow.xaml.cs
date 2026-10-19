@@ -23,6 +23,12 @@ namespace PizzeriaChainApp
         public MainWindow()
         {
             InitializeComponent();
+            var admin = PizzeriaChainApp.Data.AppData.GetContext()
+    .customer.FirstOrDefault(c => c.login == "admin");
+            MessageBox.Show(admin != null &&
+                PizzeriaChainApp.Helpers.PasswordHelper.Verify("Admin123!", admin.salt, admin.password_hash)
+                ? "База подключена, пароль проверен" : "Что-то не так");
         }
+
     }
 }
