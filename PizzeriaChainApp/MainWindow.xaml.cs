@@ -15,7 +15,7 @@ namespace PizzeriaChainApp
         public MainWindow()
         {
             InitializeComponent();
-            // На следующем шаге здесь будет: MainFrame.Navigate(new Pages.AuthPage());
+            MainFrame.Navigate(new Pages.AuthPage());
         }
 
         // Часы в правом нижнем углу
