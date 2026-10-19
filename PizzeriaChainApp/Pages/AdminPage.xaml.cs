@@ -153,5 +153,14 @@ namespace PizzeriaChainApp.Pages
             AppData.CurrentUser = null;
             NavigationService?.Navigate(new AuthPage());
         }
+        private void ButtonPizzerias_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new PizzeriasPage());
+        }
+
+        private void ButtonCustomers_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new CustomersPage());
+        }
     }
 }

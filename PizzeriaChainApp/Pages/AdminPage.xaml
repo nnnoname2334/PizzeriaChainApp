@@ -56,6 +56,10 @@
             <Button x:Name="ButtonDelete" Content="Удалить" IsEnabled="False"
                     ToolTip="Удалить выбранный заказ (сначала выберите строку)"
                     Click="ButtonDelete_Click"/>
+            <Button x:Name="ButtonPizzerias" Content="Пиццерии"
+                    ToolTip="Управление пиццериями" Click="ButtonPizzerias_Click"/>
+            <Button x:Name="ButtonCustomers" Content="Клиенты"
+                    ToolTip="Управление клиентами" Click="ButtonCustomers_Click"/>
         </WrapPanel>
 
         <!-- Таблица заказов -->

@@ -112,5 +112,83 @@ namespace PizzeriaChainApp.Helpers
                 return "Дата заказа: от 01.01.2020 до текущего момента.";
             return null;
         }
+        // ---- Пиццерии и клиенты ----
+        public const int MinBonus = 0;
+        public const int MaxBonus = 100000;
+
+        public static bool IsDigitsOnly(string text)
+        {
+            return text.All(ch => ch >= '0' && ch <= '9');
+        }
+
+        public static bool IsTitleChars(string text)
+        {
+            return Regex.IsMatch(text, @"^[A-Za-zА-Яа-яЁё0-9\-\.«»"" ]*$");
+        }
+
+        public static bool IsAddressChars(string text)
+        {
+            return Regex.IsMatch(text, @"^[A-Za-zА-Яа-яЁё0-9\-\.,/ ]*$");
+        }
+
+        public static bool IsEmailChars(string text)
+        {
+            return text.All(ch => ch >= 33 && ch <= 126);
+        }
+
+        public static string ValidatePizzeriaName(string name)
+        {
+            string n = name == null ? "" : name.Trim();
+            if (n.Length < 2 || n.Length > 100)
+                return "Название пиццерии: от 2 до 100 символов.";
+            return null;
+        }
+
+        public static string ValidateAddress(string address)
+        {
+            string a = address == null ? "" : address.Trim();
+            if (a.Length < 5 || a.Length > 200)
+                return "Адрес: от 5 до 200 символов.";
+            return null;
+        }
+
+        public static string ValidateCity(string city)
+        {
+            string c = city == null ? "" : city.Trim();
+            if (c.Length < 2 || c.Length > 100 ||
+                !Regex.IsMatch(c, @"^[A-Za-zА-Яа-яЁё]+([\- ][A-Za-zА-Яа-яЁё]+)*$"))
+                return "Город: от 2 до 100 символов, только буквы, пробел и дефис.";
+            return null;
+        }
+
+        public static string ValidateRequiredPhone(string phone)
+        {
+            if (string.IsNullOrWhiteSpace(phone))
+                return "Введите телефон.";
+            return ValidatePhone(phone);
+        }
+
+        // Email необязателен
+        public static string ValidateEmail(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+                return null;
+            if (email.Trim().Length > 100 ||
+                !Regex.IsMatch(email.Trim(), @"^[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$"))
+                return "Email указан в неверном формате.";
+            return null;
+        }
+
+        public static string ValidateBonus(string text, out int value)
+        {
+            value = 0;
+            if (string.IsNullOrWhiteSpace(text))
+                return "Введите количество бонусов.";
+            if (!int.TryParse(text.Trim(), out value))
+                return "Бонусы: введите целое число.";
+            if (value < MinBonus || value > MaxBonus)
+                return "Бонусы: от " + MinBonus + " до " + MaxBonus + ".";
+            return null;
+        }
     }
 }

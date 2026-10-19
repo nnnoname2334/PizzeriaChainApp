@@ -76,14 +76,22 @@
     <Compile Include="Data\AppData.cs" />
     <Compile Include="Data\LookupItem.cs" />
     <Compile Include="Data\OrderRow.cs" />
+    <Compile Include="Dialogs\CustomerEditWindow.xaml.cs">
+      <DependentUpon>CustomerEditWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\OrderEditWindow.xaml.cs">
       <DependentUpon>OrderEditWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\PizzeriaEditWindow.xaml.cs">
+      <DependentUpon>PizzeriaEditWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\AuthService.cs" />
     <Compile Include="Helpers\CaptchaHelper.cs" />
+    <Compile Include="Helpers\CustomerService.cs" />
     <Compile Include="Helpers\MessageHelper.cs" />
     <Compile Include="Helpers\OrderService.cs" />
     <Compile Include="Helpers\PasswordHelper.cs" />
+    <Compile Include="Helpers\PizzeriaService.cs" />
     <Compile Include="Helpers\ThemeManager.cs" />
     <Compile Include="Helpers\ValidationHelper.cs" />
     <Compile Include="Pages\AdminPage.xaml.cs">
@@ -94,6 +102,12 @@
     </Compile>
     <Compile Include="Pages\ChangePassPage.xaml.cs">
       <DependentUpon>ChangePassPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\CustomersPage.xaml.cs">
+      <DependentUpon>CustomersPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PizzeriasPage.xaml.cs">
+      <DependentUpon>PizzeriasPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\RegPage.xaml.cs">
       <DependentUpon>RegPage.xaml</DependentUpon>
@@ -116,7 +130,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Dialogs\CustomerEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dialogs\OrderEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\PizzeriaEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -145,6 +167,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ChangePassPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\CustomersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PizzeriasPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

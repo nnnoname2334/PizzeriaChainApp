@@ -1,0 +1,53 @@
+﻿<Window x:Class="PizzeriaChainApp.Dialogs.PizzeriaEditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Style="{StaticResource {x:Type Window}}"
+        Title="Пиццерия" Width="620" Height="440"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+    <StackPanel Margin="24" HorizontalAlignment="Center">
+        <TextBlock x:Name="TextTitle" FontSize="22" FontWeight="Bold"
+                   HorizontalAlignment="Center" Margin="0,0,0,16"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Content="Название" VerticalAlignment="Center"/>
+            <TextBox x:Name="TextBoxName" Grid.Row="0" Grid.Column="1" Width="360"
+                     Tag="Например, Пицца Классика" MaxLength="100"
+                     ToolTip="От 2 до 100 символов"
+                     PreviewTextInput="TextBoxName_PreviewTextInput"/>
+
+            <Label Grid.Row="1" Content="Город" VerticalAlignment="Center"/>
+            <TextBox x:Name="TextBoxCity" Grid.Row="1" Grid.Column="1" Width="360"
+                     Tag="Например, Москва" MaxLength="100"
+                     ToolTip="Только буквы, пробел и дефис"
+                     PreviewTextInput="TextBoxCity_PreviewTextInput"/>
+
+            <Label Grid.Row="2" Content="Адрес" VerticalAlignment="Center"/>
+            <TextBox x:Name="TextBoxAddress" Grid.Row="2" Grid.Column="1" Width="360"
+                     Tag="Например, ул. Ленина, 10" MaxLength="200"
+                     ToolTip="От 5 до 200 символов"
+                     PreviewTextInput="TextBoxAddress_PreviewTextInput"/>
+
+            <Label Grid.Row="3" Content="Телефон" VerticalAlignment="Center"/>
+            <TextBox x:Name="TextBoxPhone" Grid.Row="3" Grid.Column="1" Width="360"
+                     Tag="+7XXXXXXXXXX" MaxLength="12"
+                     ToolTip="Формат: +7 и 10 цифр"
+                     PreviewTextInput="TextBoxPhone_PreviewTextInput"/>
+        </Grid>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,16,0,0">
+            <Button Content="Сохранить" IsDefault="True" ToolTip="Сохранить пиццерию"
+                    Click="ButtonSave_Click"/>
+            <Button Content="Отмена" IsCancel="True" ToolTip="Закрыть окно без сохранения"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

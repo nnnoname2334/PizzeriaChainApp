@@ -1,0 +1,52 @@
+﻿<Page x:Class="PizzeriaChainApp.Pages.PizzeriasPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Пиццерии" Loaded="Page_Loaded">
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <WrapPanel Grid.Row="0">
+            <TextBox x:Name="TextBoxSearch" Tag="Поиск: название, город, адрес" MaxLength="100"
+                     ToolTip="Поиск по названию, городу, адресу или телефону"
+                     TextChanged="Filter_Changed"/>
+            <ComboBox x:Name="ComboSort" SelectedIndex="0" ToolTip="Сортировка пиццерий"
+                      SelectionChanged="Filter_Changed">
+                <ComboBoxItem Content="По городу"/>
+                <ComboBoxItem Content="По названию"/>
+                <ComboBoxItem Content="По адресу"/>
+            </ComboBox>
+            <ComboBox x:Name="ComboCity" ToolTip="Фильтр по городу"
+                      SelectionChanged="Filter_Changed"/>
+            <Button Content="Очистить фильтры" ToolTip="Сбросить поиск, сортировку и фильтры"
+                    Click="ButtonClear_Click"/>
+        </WrapPanel>
+
+        <WrapPanel Grid.Row="1" Margin="0,4,0,4">
+            <Button Content="Добавить" ToolTip="Добавить пиццерию" Click="ButtonAdd_Click"/>
+            <Button x:Name="ButtonEdit" Content="Изменить" IsEnabled="False"
+                    ToolTip="Изменить выбранную пиццерию (сначала выберите строку)"
+                    Click="ButtonEdit_Click"/>
+            <Button x:Name="ButtonDelete" Content="Удалить" IsEnabled="False"
+                    ToolTip="Удалить выбранную пиццерию вместе с её заказами"
+                    Click="ButtonDelete_Click"/>
+        </WrapPanel>
+
+        <DataGrid x:Name="DataGridItems" Grid.Row="2" CanUserSortColumns="False"
+                  ToolTip="Список пиццерий" SelectionChanged="DataGridItems_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="№" Binding="{Binding id}" Width="60"/>
+                <DataGridTextColumn Header="Название" Binding="{Binding name}" Width="*"/>
+                <DataGridTextColumn Header="Город" Binding="{Binding city}" Width="*"/>
+                <DataGridTextColumn Header="Адрес" Binding="{Binding address}" Width="1.3*"/>
+                <DataGridTextColumn Header="Телефон" Binding="{Binding phone}" Width="150"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <TextBlock x:Name="TextSummary" Grid.Row="3" Margin="8,4" TextWrapping="Wrap"/>
+    </Grid>
+</Page>
