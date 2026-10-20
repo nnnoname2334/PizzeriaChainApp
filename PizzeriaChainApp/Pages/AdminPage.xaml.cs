@@ -162,5 +162,9 @@ namespace PizzeriaChainApp.Pages
         {
             NavigationService?.Navigate(new CustomersPage());
         }
+        private void ButtonDiagram_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new DiagrammPage());
+        }
     }
 }

@@ -1,0 +1,36 @@
+﻿<Page x:Class="PizzeriaChainApp.Pages.DiagrammPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:wfi="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
+      xmlns:charts="clr-namespace:System.Windows.Forms.DataVisualization.Charting;assembly=System.Windows.Forms.DataVisualization"
+      Title="Диаграмма и экспорт" Loaded="Page_Loaded">
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <WrapPanel Grid.Row="0" Margin="0,0,0,8">
+            <ComboBox x:Name="ComboCustomer" Width="300" DisplayMemberPath="full_name"
+                      ToolTip="Выберите клиента для диаграммы"
+                      SelectionChanged="UpdateChart"/>
+            <ComboBox x:Name="ComboChartType" DisplayMemberPath="Name"
+                      ToolTip="Выберите тип диаграммы"
+                      SelectionChanged="UpdateChart"/>
+            <Button x:Name="ButtonExportWord" Content="Экспорт в Word"
+                    ToolTip="Выгрузить заказы клиентов в Word (.docx) и PDF"
+                    Click="ButtonExportWord_Click"/>
+            <Button x:Name="ButtonExportExcel" Content="Экспорт в Excel"
+                    ToolTip="Выгрузить заказы клиентов в Excel (.xlsx)"
+                    Click="ButtonExportExcel_Click"/>
+        </WrapPanel>
+
+        <wfi:WindowsFormsHost Grid.Row="1" Margin="5">
+            <charts:Chart x:Name="ChartOrders">
+                <charts:Chart.Legends>
+                    <charts:Legend/>
+                </charts:Chart.Legends>
+            </charts:Chart>
+        </wfi:WindowsFormsHost>
+    </Grid>
+</Page>

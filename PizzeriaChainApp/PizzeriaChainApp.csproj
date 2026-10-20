@@ -92,12 +92,15 @@
     <Compile Include="Helpers\AuthService.cs" />
     <Compile Include="Helpers\CaptchaHelper.cs" />
     <Compile Include="Helpers\CustomerService.cs" />
+    <Compile Include="Helpers\ExcelExporter.cs" />
     <Compile Include="Helpers\MessageHelper.cs" />
     <Compile Include="Helpers\OrderService.cs" />
     <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Helpers\PizzeriaService.cs" />
+    <Compile Include="Helpers\ReportService.cs" />
     <Compile Include="Helpers\ThemeManager.cs" />
     <Compile Include="Helpers\ValidationHelper.cs" />
+    <Compile Include="Helpers\WordExporter.cs" />
     <Compile Include="Pages\AdminPage.xaml.cs">
       <DependentUpon>AdminPage.xaml</DependentUpon>
     </Compile>
@@ -109,6 +112,9 @@
     </Compile>
     <Compile Include="Pages\CustomersPage.xaml.cs">
       <DependentUpon>CustomersPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\DiagrammPage.xaml.cs">
+      <DependentUpon>DiagrammPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\PizzeriasPage.xaml.cs">
       <DependentUpon>PizzeriasPage.xaml</DependentUpon>
@@ -175,6 +181,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\CustomersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\DiagrammPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

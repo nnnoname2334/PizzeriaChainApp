@@ -60,6 +60,9 @@
                     ToolTip="Управление пиццериями" Click="ButtonPizzerias_Click"/>
             <Button x:Name="ButtonCustomers" Content="Клиенты"
                     ToolTip="Управление клиентами" Click="ButtonCustomers_Click"/>
+            <Button x:Name="ButtonDiagram" Content="Диаграмма и экспорт"
+                    ToolTip="Диаграмма заказов и выгрузка в Word, PDF, Excel"
+                    Click="ButtonDiagram_Click"/>
         </WrapPanel>
 
         <!-- Таблица заказов -->
