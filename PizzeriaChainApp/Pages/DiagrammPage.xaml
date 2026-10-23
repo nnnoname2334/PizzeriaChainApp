@@ -20,6 +20,9 @@
             <Button x:Name="ButtonExportWord" Content="Экспорт в Word"
                     ToolTip="Выгрузить заказы клиентов в Word (.docx) и PDF"
                     Click="ButtonExportWord_Click"/>
+            <Button x:Name="ButtonExportPdf" Content="Экспорт в PDF"
+                    ToolTip="Выгрузить заказы клиентов в PDF"
+                    Click="ButtonExportPdf_Click"/>
             <Button x:Name="ButtonExportExcel" Content="Экспорт в Excel"
                     ToolTip="Выгрузить заказы клиентов в Excel (.xlsx)"
                     Click="ButtonExportExcel_Click"/>

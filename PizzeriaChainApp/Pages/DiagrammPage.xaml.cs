@@ -143,6 +143,31 @@ namespace PizzeriaChainApp.Pages
             RunExport(() => WordExporter.Export(reports, _pizzerias, docxPath, pdfPath),
                 "Отчёт сохранён:\n" + docxPath + "\n" + pdfPath);
         }
+        private void ButtonExportPdf_Click(object sender, RoutedEventArgs e)
+        {
+            List<CustomerReport> reports = LoadReports();
+            if (reports == null)
+                return;
+
+            var dialog = new SaveFileDialog
+            {
+                Title = "Сохранить отчёт PDF",
+                Filter = "Документ PDF (*.pdf)|*.pdf",
+                FileName = "Заказы_клиентов_" + DateTime.Now.ToString("yyyyMMdd")
+            };
+            if (dialog.ShowDialog() != true)
+                return;
+
+            string pdfPath = dialog.FileName;
+
+            RunExport(() =>
+            {
+                WordExporter.ExportPdf(reports, _pizzerias, pdfPath);
+
+                // Открываем готовый PDF (если нет программы просмотра, просто пропускаем)
+                try { System.Diagnostics.Process.Start(pdfPath); } catch { }
+            }, "Отчёт сохранён:\n" + pdfPath);
+        }
 
         private void ButtonExportExcel_Click(object sender, RoutedEventArgs e)
         {
