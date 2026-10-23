@@ -48,7 +48,6 @@ namespace PizzeriaChainApp
         // Динамический заголовок: берётся из свойства Title текущей страницы
         private void MainFrame_Navigated(object sender, NavigationEventArgs e)
         {
-            ButtonBack.Visibility = MainFrame.CanGoBack ? Visibility.Visible : Visibility.Hidden;
 
             string title = (MainFrame.Content as Page)?.Title ?? "";
             PageTitleText.Text = title;

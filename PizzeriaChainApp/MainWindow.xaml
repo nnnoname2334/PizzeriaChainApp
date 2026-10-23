@@ -22,8 +22,19 @@
             </Grid.ColumnDefinitions>
 
             <Button x:Name="ButtonBack" Grid.Column="0" Content="Назад"
-                    ToolTip="Вернуться на предыдущую страницу"
-                    Visibility="Hidden" Click="ButtonBack_Click"/>
+                    ToolTip="Вернуться на предыдущую страницу" Click="ButtonBack_Click">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                        <Setter Property="Visibility" Value="Hidden"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding CanGoBack, ElementName=MainFrame}"
+                                         Value="True">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
 
             <TextBlock x:Name="PageTitleText" Grid.Column="1"
                        HorizontalAlignment="Center" VerticalAlignment="Center"
